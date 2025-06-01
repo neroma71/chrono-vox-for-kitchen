@@ -11,7 +11,9 @@ let s = 0;
 
 // Tableau des phrases et moments où elles doivent être dites
 const phrases = [
+    { time: { min: 2, sec: 0 }, text: "les œeufs sont pochés" },
     { time: { min: 3, sec: 0 }, text: "Prépare les mouilettes, les oeufs coques sont prèts" },
+    { time: { min: 6, sec: 0 }, text: "les œufs sont mollets" },
     { time: { min: 9, sec: 0 }, text: "Les oeufs durs sont prèts" }
 ];
 
@@ -25,8 +27,9 @@ function count() {
         m = 0;
         h++;
     }
-
-    // Vérification des phrases à dire à chaque moment
+    if (h === 24) {
+        h = 0; 
+    }
     phrases.forEach((phrase, index) => {
         if (m === phrase.time.min && s === phrase.time.sec && !uttHasBeenSpoken[index]) {
             let utt = new SpeechSynthesisUtterance(phrase.text);
